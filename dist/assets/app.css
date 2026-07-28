@@ -71,6 +71,11 @@ html[data-skin=pixel][data-mode=light] {
   --radius:0;
 }
 html[data-skin=pixel] { --px:4px; }
+html[data-skin=pixel] .ov-item .v, html[data-skin=pixel] .stat .v {
+  font-family: var(--font-head); font-size: 15px; line-height: 1.6;
+}
+html[data-skin=pixel] .brand-name { font-size: 13px; }
+html[data-skin=pixel] .dhead h1 { font-size: 19px; }
 
 /* ---------- base ---------- */
 html, body { height: 100%; }
@@ -217,6 +222,40 @@ html[data-skin=cyber] .card .net .down { color: var(--acc); }
   border-top: 2px solid var(--line); background: var(--bg2);
 }
 html[data-skin=terminal] body.fx .bar > i { box-shadow: 0 0 8px var(--pri); }
+/* terminal: phosphor ASCII-block bars */
+html[data-skin=terminal] .bar > i {
+  background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.45) 0 2px, transparent 2px 9px);
+  background-color: var(--pri);
+}
+html[data-skin=terminal] .bar.warn > i, html[data-skin=pixel] .bar.warn > i { background-color: var(--warn); }
+html[data-skin=terminal] .bar.crit > i, html[data-skin=pixel] .bar.crit > i { background-color: var(--bad); }
+
+/* realtime status dot */
+.ws-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); flex: none; transition: background .3s; }
+.ws-dot.live { background: var(--ok); box-shadow: 0 0 8px var(--ok); animation: pulse 2s ease-in-out infinite; }
+html[data-skin=pixel] .ws-dot { border-radius: 0; }
+@keyframes pulse { 50% { opacity: .45; } }
+
+/* offline badge */
+.off-badge { display: none; font-size: 10px; letter-spacing: 1px; color: var(--bad); border: 1px solid var(--bad); padding: 0 5px; border-radius: 3px; }
+.card.off .off-badge { display: inline-block; }
+
+/* card entrance */
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+.grid .card { animation: rise .35s ease both; }
+.grid .card:nth-child(2) { animation-delay: .04s } .grid .card:nth-child(3) { animation-delay: .08s }
+.grid .card:nth-child(4) { animation-delay: .12s } .grid .card:nth-child(5) { animation-delay: .16s }
+.grid .card:nth-child(6) { animation-delay: .2s } .grid .card:nth-child(n+7) { animation-delay: .24s }
+.ov-item { animation: rise .3s ease both; }
+.ov-item:nth-child(2) { animation-delay: .05s } .ov-item:nth-child(3) { animation-delay: .1s } .ov-item:nth-child(4) { animation-delay: .15s }
+
+/* cyber fx: glow on stat values */
+html[data-skin=cyber] body.fx .stat .v { text-shadow: var(--neona); }
+.dim { color: var(--dim); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
 
 @media (max-width: 640px) {
   .brand-name { max-width: 34vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
