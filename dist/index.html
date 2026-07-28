@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-skin="terminal" data-mode="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Komari Monitor</title>
+<meta name="description" content="A simple server monitor tool." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/app.css?v=1.0.2" />
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <a class="brand" href="#/" id="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name" id="sitename">Komari</span>
+    </a>
+    <div class="top-actions">
+      <div class="seg" id="skin-seg" role="group" aria-label="skin">
+        <button data-skin="terminal" title="Retro Terminal">TERM</button>
+        <button data-skin="cyber" title="Cyberpunk">CYBR</button>
+        <button data-skin="pixel" title="Pixel Game">PIXL</button>
+      </div>
+      <button id="mode-btn" class="icon-btn" title="appearance">◐</button>
+      <button id="lang-btn" class="icon-btn" title="language">文</button>
+      <a id="admin-link" class="icon-btn" href="/admin" title="Admin">⚙</a>
+    </div>
+  </header>
+  <main id="view"></main>
+  <footer id="footer">
+    <span id="footer-extra"></span>
+    <span>Powered by <a href="https://github.com/komari-monitor/komari" target="_blank" rel="noopener">Komari Monitor</a>.</span>
+  </footer>
+</div>
+<script>
+/* clean up service workers & caches left by previous themes */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistrations().then(function(rs){
+    rs.forEach(function(r){ r.unregister(); });
+  });
+}
+if (window.caches && caches.keys) {
+  caches.keys().then(function(ks){ ks.forEach(function(k){ caches.delete(k); }); });
+}
+</script>
+<script src="assets/app.js?v=1.0.2"></script>
+</body>
+</html>
